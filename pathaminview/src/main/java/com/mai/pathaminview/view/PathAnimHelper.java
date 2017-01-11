@@ -204,7 +204,7 @@ public class PathAnimHelper {
      * @param pathMeasure
      * @param animator
      */
-    private void onPathAnimCallback(View view, Path sourcePath, Path animPath, PathMeasure pathMeasure, ValueAnimator animator) {
+    public void onPathAnimCallback(View view, Path sourcePath, Path animPath, PathMeasure pathMeasure, ValueAnimator animator) {
         float value = (float) animator.getAnimatedValue();
         //获取一个段落
         pathMeasure.getSegment(0,pathMeasure.getLength() * value ,animPath,true);
@@ -213,7 +213,7 @@ public class PathAnimHelper {
     /**
      * 停止动画
      */
-    private void stopAnim() {
+    public void stopAnim() {
         if (null != mAnimator && mAnimator.isRunning()) {
             mAnimator.end();
         }

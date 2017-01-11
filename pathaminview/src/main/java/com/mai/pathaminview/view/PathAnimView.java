@@ -24,6 +24,8 @@ public class PathAnimView extends View {
     protected PathAnimHelper mPathAnimHelper;//path动画工具类
     
     protected int mPaddingLeft,mPaddingTop;
+    
+    public static final float SCALE = 1.5f;
 
     public PathAnimView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -138,6 +140,7 @@ public class PathAnimView extends View {
     @Override       
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.scale(SCALE,SCALE);
         //平移
         canvas.translate(mPaddingLeft,mPaddingTop);
         
@@ -149,6 +152,44 @@ public class PathAnimView extends View {
         mPaint.setColor(mColorFg);
         canvas.drawPath(mAnimPath,mPaint);
     }
+
+    /**
+     * 设置动画 循环
+     */
+    public PathAnimView setAnimInfinite(boolean infinite) {
+        mPathAnimHelper.setInfinite(infinite);
+        return this;
+    }
+
+    /**
+     * 设置动画 总时长
+     */
+    public PathAnimView setAnimTime(long animTime){
+        mPathAnimHelper.setAnimTime(animTime);
+        return this;
+    }
     
-    
+    /**
+     * 执行循环动画
+     */
+    public void startAnim(){
+        mPathAnimHelper.startAnim();
+    }
+
+    /**
+     * 停止动画
+     */
+    public void stopAnim(){
+        mPathAnimHelper.stopAnim();
+    }
+
+    /**
+     * 清除并停止动画
+     */
+    public void clearAnim(){
+        stopAnim();
+        mAnimPath.reset();
+        mAnimPath.lineTo(0,0);
+        invalidate();
+    }
 }
